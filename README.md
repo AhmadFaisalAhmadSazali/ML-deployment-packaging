@@ -32,7 +32,7 @@ This repository provides a FastAPI-based REST API to serve a machine learning mo
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/machine-learning-serving.git
+   git clone https://github.com/AhmadFaisalAhmadSazali/ML-deployment-packaging.git
    cd machine-learning-serving
 
 2. Install the required dependencies:
