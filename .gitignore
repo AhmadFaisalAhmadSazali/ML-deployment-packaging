@@ -19,6 +19,8 @@ lib/
 lib64/
 parts/
 sdist/
+model/
+obsolete/
 var/
 wheels/
 data/
