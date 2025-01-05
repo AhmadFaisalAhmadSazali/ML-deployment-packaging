@@ -1,6 +1,6 @@
-# %% 
-import requests
+# %%
 import pandas as pd
+import requests
 
 url = "http://127.0.0.1:8000/prediction"
 

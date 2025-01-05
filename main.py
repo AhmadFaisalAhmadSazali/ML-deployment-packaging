@@ -1,53 +1,27 @@
-import pickle
 from typing import Any
 
-import pandas as pd
 from fastapi import FastAPI
-from pydantic import BaseModel
 
-with open("model/trained_model.pkl", "rb") as file:
-    model = pickle.load(file)
+from core.data_models import Data, Predictions
+from core.prediction import make_predictions
 
 app = FastAPI()
 
 
-class Features(BaseModel):
-    highbp: float
-    highchol: float
-    cholcheck: float
-    bmi: float
-    smoker: float
-    stroke: float
-    heartdiseaseorattack: float
-    physactivity: float
-    fruits: float
-    veggies: float
-    hvyalcoholconsump: float
-    anyhealthcare: float
-    nodocbccost: float
-    genhlth: float
-    menthlth: float
-    physhlth: float
-    diffwalk: float
-    sex: float
-    age: float
-    education: float
-    income: float
-
-
-class Data(BaseModel):
-    data: dict[int, Features]
-
-
-class Predictions(BaseModel):
-    predictions: dict[int, int]
-
-
 @app.post("/prediction", response_model=Predictions)
-async def make_prediction(features: Data) -> Any:
-    index = features.data.keys()
-    processed_data = {idx: values.model_dump() for idx, values in features.data.items()}
-    input_data = pd.DataFrame.from_dict(processed_data, orient="index")
-    predictions = model.predict(input_data).tolist()
-    result = {key: value for key, value in zip(index, predictions)}
+async def prediction(data: Data) -> Any:
+    """
+    Handles prediction requests by processing input data and returning predictions.
+
+    Parameters
+    ----------
+        data : Data 
+            The input data containing a dictionary of features for multiple records.
+
+    Returns
+    -------
+        Predictions 
+            A dictionary mapping record IDs to their predicted class labels.
+    """
+    result = make_predictions(data)
     return Predictions(predictions=result)
