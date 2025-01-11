@@ -42,3 +42,14 @@ This repository provides a FastAPI-based REST API to serve a machine learning mo
 3. Run the FastAPI server:
    ```bash
    fastapi dev main.py
+
+### Steps for building and running Docker ML 
+1. Build the docker image:
+   ```bash
+   docker build -t diabetes-prediction .
+
+2. Run the container:
+   ```bash
+   docker run -d -p 5000:8000 diabetes-prediction
+
+3. Run `endpoint_testing.py` to test the deployed endpoint.
