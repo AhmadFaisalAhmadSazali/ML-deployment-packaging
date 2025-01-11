@@ -2,7 +2,7 @@
 import pandas as pd
 import requests
 
-url = "http://127.0.0.1:8000/prediction"
+url = "http://127.0.0.1:5000/prediction"
 
 data = pd.read_csv("data/raw/diabetes_binary_health_indicators_BRFSS2015.csv")
 data.columns = data.columns.str.lower()
