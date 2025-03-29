@@ -26,7 +26,7 @@ This repository provides a FastAPI-based REST API to serve a machine learning mo
 
 ### Prerequisites
 - Python 3.12 or higher
-- `pip` for package management
+- `pip` and `poetry` for package management
 - Docker (optional, for containerized deployment)
 
 ### Steps
@@ -37,7 +37,7 @@ This repository provides a FastAPI-based REST API to serve a machine learning mo
 
 2. Install the required dependencies:
    ```bash
-   pip install -r requirements.txt
+   poetry install
 
 3. Run the FastAPI server:
    ```bash

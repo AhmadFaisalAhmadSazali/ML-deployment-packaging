@@ -5,14 +5,16 @@ import pandas as pd
 
 from core.data_models import Data
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-model_path = os.path.join(BASE_DIR, "trained_model.pkl")
 
-with open(model_path, "rb") as file:
-    model = pickle.load(file)
+def get_model():
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(BASE_DIR, "trained_model.pkl")
+
+    with open(model_path, "rb") as file:
+        return pickle.load(file)
 
 
-def make_predictions(data: Data) -> dict[int, int]:
+def make_predictions(data: Data, model) -> dict[int, int]:
     """
     A function to make predictions on passed data using trained model.
 

@@ -3,9 +3,11 @@ from typing import Any
 from fastapi import FastAPI
 
 from core.data_models import Data, Predictions
-from core.prediction import make_predictions
+from core.prediction import get_model, make_predictions
 
 app = FastAPI()
+
+model = get_model()
 
 
 @app.post("/prediction", response_model=Predictions)
@@ -15,13 +17,13 @@ async def prediction(data: Data) -> Any:
 
     Parameters
     ----------
-        data : Data 
+        data : Data
             The input data containing a dictionary of features for multiple records.
 
     Returns
     -------
-        Predictions 
+        Predictions
             A dictionary mapping record IDs to their predicted class labels.
     """
-    result = make_predictions(data)
+    result = make_predictions(data, model)
     return Predictions(predictions=result)

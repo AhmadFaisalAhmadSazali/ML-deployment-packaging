@@ -3,8 +3,14 @@ FROM python:${PYTHON_VERSION}-slim AS base
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV PATH="/root/.local/bin:$PATH"
 
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl && \
+    curl -sSL https://install.python-poetry.org | python3 - && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get purge -y --auto-remove curl
 
 ARG UID=10001
 RUN adduser \
@@ -16,9 +22,10 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 
-COPY requirements.txt .
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --no-cache-dir -r requirements.txt
+COPY poetry.lock pyproject.toml ./
+
+RUN poetry config virtualenvs.create false
+RUN poetry install --no-root --only deploy
 
 USER appuser
 

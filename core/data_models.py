@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 class Features(BaseModel):
     """Represents the feature set for a health-related prediction model."""
+
     highbp: float
     highchol: float
     cholcheck: float
@@ -33,6 +34,7 @@ class Data(BaseModel):
     Attributes:
         data (dict[int, Features]): A dictionary mapping record IDs to their corresponding features.
     """
+
     data: dict[int, Features]
 
 
@@ -43,4 +45,5 @@ class Predictions(BaseModel):
     Attributes:
         predictions (dict[int, int]): A dictionary mapping record IDs to their predicted class labels.
     """
+
     predictions: dict[int, int]
