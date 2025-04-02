@@ -1,6 +1,6 @@
 [project]
 name = "diabetes-prediction"
-version = "0.0.1"
+version = "0.1.0"
 package-mode = false
 description = "A diabetes prediction machine learning model development and deployment."
 authors = [
